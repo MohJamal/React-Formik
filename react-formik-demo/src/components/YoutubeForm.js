@@ -6,6 +6,8 @@ const initialValues = {
   name: "",
   email: "",
   channel: "",
+  comments: "",
+  address: "",
 };
 
 const onSubmit = (values) => console.log("Form data", values);
@@ -45,6 +47,29 @@ const YoutubeForm = () => {
           <Field type="text" id="channel" name="channel" />
           <ErrorMessage name="channel" />
         </div>
+
+        <div className="form-control">
+          <label htmlFor="comments">Comments</label>
+          {/* as="textarea" */}
+          <Field as="textarea" id="comments" name="comments" />
+        </div>
+
+        {/* render props pattern */}
+        {/* We use it when we use custom components in a form and we want to hook them into the formik component */}
+        <div className="form-control">
+          <label htmlFor="address">Address</label>
+          <Field name="address">
+            {({ field, form, meta }) => {
+              return (
+                <div>
+                  <input type="text" {...field} />
+                  {meta.touched && meta.error ? <div>{meta.error}</div> : null}
+                </div>
+              );
+            }}
+          </Field>
+        </div>
+
         <button type="submit">Submit</button>
       </Form>
     </Formik>
