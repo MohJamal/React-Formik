@@ -1,4 +1,4 @@
-import { useFormik } from "formik";
+import { Formik } from "formik";
 import React from "react";
 import * as yup from "yup";
 
@@ -10,30 +10,6 @@ const initialValues = {
 
 const onSubmit = (values) => console.log("Form data", values);
 
-const validate = (values) => {
-  // values.name values.email values.channel
-  // errors.name errors.email errors.channel
-  // errors.name = 'The field is required'
-
-  let errors = {};
-
-  if (!values.name) {
-    errors.name = "Required";
-  }
-
-  if (!values.email) {
-    errors.email = "Required";
-  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-    errors.email = "Invalid email format";
-  }
-
-  if (!values.channel) {
-    errors.channel = "Required";
-  }
-
-  return errors;
-};
-
 const validationSchema = yup.object({
   name: yup.string().required("Required!"),
   email: yup.string().email("Invalid email format").required("Required"),
@@ -41,19 +17,16 @@ const validationSchema = yup.object({
 });
 
 const YoutubeForm = () => {
-  const formik = useFormik({
-    initialValues,
-    onSubmit,
-    validationSchema,
-    // validate,
-  });
-
   // console.log("Form values", formik.values);
   // console.log("Form errors", formik.errors);
   // console.log("Visited fields", formik.touched);
 
   return (
-    <div>
+    <Formik
+      initialValues={initialValues}
+      onSubmit={onSubmit}
+      validationSchema={validationSchema}
+    >
       <form onSubmit={formik.handleSubmit}>
         <div className="form-control">
           <label htmlFor="name">Name</label>
@@ -95,7 +68,7 @@ const YoutubeForm = () => {
         </div>
         <button type="submit">Submit</button>
       </form>
-    </div>
+    </Formik>
   );
 };
 
