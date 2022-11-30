@@ -1,4 +1,11 @@
-import { Formik, Form, Field, ErrorMessage, FieldArray } from "formik";
+import {
+  Formik,
+  Form,
+  Field,
+  ErrorMessage,
+  FieldArray,
+  FastField,
+} from "formik";
 import React from "react";
 import * as yup from "yup";
 import TextError from "./TextError";
@@ -35,6 +42,8 @@ const YoutubeForm = () => {
       initialValues={initialValues}
       onSubmit={onSubmit}
       validationSchema={validationSchema}
+      // validateOnChange={false}
+      // validateOnBlur={false}
     >
       <Form>
         <div className="form-control">
@@ -67,8 +76,9 @@ const YoutubeForm = () => {
         {/* We use it when we use custom components in a form and we want to hook them into the formik component */}
         <div className="form-control">
           <label htmlFor="address">Address</label>
-          <Field name="address">
+          <FastField name="address">
             {({ field, form, meta }) => {
+              console.log("Field render");
               return (
                 <div>
                   <input type="text" {...field} />
@@ -76,7 +86,7 @@ const YoutubeForm = () => {
                 </div>
               );
             }}
-          </Field>
+          </FastField>
         </div>
 
         <div className="form-control">
@@ -106,7 +116,8 @@ const YoutubeForm = () => {
               const { push, remove, form } = fieldArrayProps;
               const { values } = form;
               const { phNumbers } = values;
-              console.log("fieldArrayProps", fieldArrayProps);
+              // console.log("fieldArrayProps", fieldArrayProps);
+              // console.log("Form errors", form.errors);
               return (
                 <div>
                   {phNumbers.map((phNumber, index) => (
