@@ -52,6 +52,7 @@ const YoutubeForm = () => {
       validationSchema={validationSchema}
       // validateOnChange={false}
       // validateOnBlur={false}
+      validateOnMount
     >
       {/* render props pattern */}
       {(formik) => {
