@@ -52,7 +52,7 @@ const YoutubeForm = () => {
       validationSchema={validationSchema}
       // validateOnChange={false}
       // validateOnBlur={false}
-      validateOnMount
+      // validateOnMount
     >
       {/* render props pattern */}
       {(formik) => {
@@ -189,7 +189,7 @@ const YoutubeForm = () => {
               Visit all
             </button>
 
-            <button type="submit" disabled={!formik.isValid}>
+            <button type="submit" disabled={!(formik.dirty && formik.isValid)}>
               Submit
             </button>
           </Form>
