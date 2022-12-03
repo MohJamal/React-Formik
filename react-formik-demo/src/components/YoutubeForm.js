@@ -188,7 +188,9 @@ const YoutubeForm = () => {
               Visit all
             </button>
 
-            <button type="submit">Submit</button>
+            <button type="submit" disabled={!formik.isValid}>
+              Submit
+            </button>
           </Form>
         );
       }}
