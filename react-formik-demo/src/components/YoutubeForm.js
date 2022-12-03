@@ -43,6 +43,9 @@ const onSubmit = (values, submitProps) => {
   console.log("Form data", values);
   console.log("submitProps", submitProps);
   submitProps.setSubmitting(false);
+
+  /* Reset data when submit the form! */
+  submitProps.resetForm();
 };
 
 const validationSchema = yup.object({
@@ -214,6 +217,9 @@ const YoutubeForm = () => {
             <button type="button" onClick={() => setFormValues(savedValues)}>
               Load saved data
             </button>
+
+            {/* Reset Data when click reset button*/}
+            <button type="reset">Reset</button>
 
             <button
               type="submit"
