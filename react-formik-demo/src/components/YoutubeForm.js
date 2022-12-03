@@ -6,16 +6,31 @@ import {
   FieldArray,
   FastField,
 } from "formik";
-import React from "react";
+import React, { useState } from "react";
 import * as yup from "yup";
 import TextError from "./TextError";
 
 const initialValues = {
-  name: "",
+  name: "Mohjamal",
   email: "",
   channel: "",
   comments: "",
   address: "",
+  social: {
+    facebook: "",
+    twitter: "",
+  },
+  phoneNumbers: ["", ""],
+  phNumbers: [""],
+};
+
+/* It is mocking data that would be received from an API */
+const savedValues = {
+  name: "Mohjamal",
+  email: "test@test.com",
+  channel: "Channel",
+  comments: "abcd",
+  address: "exmaple street",
   social: {
     facebook: "",
     twitter: "",
@@ -45,15 +60,18 @@ const validateComments = (value) => {
 };
 
 const YoutubeForm = () => {
+  const [formValues, setFormValues] = useState(null);
+
   // console.log("Form values", formik.values);
   // console.log("Form errors", formik.errors);
   // console.log("Visited fields", formik.touched);
 
   return (
     <Formik
-      initialValues={initialValues}
+      initialValues={formValues || initialValues}
       onSubmit={onSubmit}
       validationSchema={validationSchema}
+      enableReinitialize
       // validateOnChange={false}
       // validateOnBlur={false}
       // validateOnMount
@@ -163,7 +181,7 @@ const YoutubeForm = () => {
                 }}
               </FieldArray>
             </div>
-
+            {/* 
             <button
               type="button"
               onClick={() => formik.validateField("comments")}
@@ -191,6 +209,10 @@ const YoutubeForm = () => {
               }
             >
               Visit all
+            </button> */}
+
+            <button type="button" onClick={() => setFormValues(savedValues)}>
+              Load saved data
             </button>
 
             <button
