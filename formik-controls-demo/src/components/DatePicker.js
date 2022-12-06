@@ -8,7 +8,7 @@ function DatePicker(props) {
   const { label, name, ...rest } = props;
   return (
     <div className="form-control">
-      <label>{label}</label>
+      <label htmlFor={name}>{label}</label>
       <Field name={name}>
         {({ form, field }) => {
           const { setFieldValue } = form;
