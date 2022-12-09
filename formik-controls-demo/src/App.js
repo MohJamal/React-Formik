@@ -10,9 +10,9 @@ function App() {
     <ThemeProvider theme={theme}>
       <div className="App">
         {/* <FormikContainer /> */}
-        {/* <LoginForm /> */}
+        <LoginForm />
         {/* <RegistrationForm /> */}
-        <EnrollmentForm />
+        {/* <EnrollmentForm /> */}
       </div>
     </ThemeProvider>
   );
